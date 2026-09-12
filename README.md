@@ -1,10 +1,14 @@
 <p align="center">
+  <img src="assets/banner.png" alt="MetaPeek" width="100%">
+</p>
+
+<p align="center">
   <img alt="License" src="https://img.shields.io/badge/license-MIT-2dd4a7.svg">
   <img alt="Platform" src="https://img.shields.io/badge/platform-macOS%2015%2B-7dd88f.svg">
   <img alt="Swift" src="https://img.shields.io/badge/swift-6.0-f6c454.svg">
 </p>
 
-# MetaPeek
+<p align="center"><sub>🇬🇧 English · <a href="README.tr.md">🇹🇷 Türkçe</a></sub></p>
 
 A native macOS app that inspects the metadata hiding inside **any file, regardless of extension** — built for CTF and OSINT work, where the file's metadata is often more interesting than its content.
 
@@ -39,12 +43,16 @@ Most metadata tools are either a CLI you have to remember flags for (`exiftool`,
 - **Export** — JSON export per file, or copy everything to the clipboard as text
 - Interface follows **system light/dark mode**, and switches between **Turkish and English** automatically based on the system language
 
-## Install / Build
+## Download
+
+Grab the latest `.app` from the [releases page](https://github.com/gorkemguler/MetaPeek/releases), unzip, and move it to Applications. The build is ad-hoc signed rather than notarized, so the first launch needs a right-click (or Control-click) → **Open** → **Open** to get past Gatekeeper.
+
+## Build from source
 
 Requires macOS 15+ and Xcode 16+ command line tools.
 
 ```bash
-git clone https://github.com/<your-username>/MetaPeek.git
+git clone https://github.com/gorkemguler/MetaPeek.git
 cd MetaPeek
 ./build_app.sh
 open dist/MetaPeek.app
