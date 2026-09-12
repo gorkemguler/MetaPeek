@@ -39,6 +39,7 @@ Most metadata tools are either a CLI you have to remember flags for (`exiftool`,
 - **Images**: EXIF, GPS, TIFF, IPTC, PNG/JFIF chunks (via Apple's ImageIO) plus an inline map preview when GPS is present
 - **Error Level Analysis (ELA)**: re-compresses the image and amplifies the difference, so regions that were edited or pasted in stand out from the rest of the frame
 - **Hidden Pixels (LSB)**: renders the least significant bit of every colour channel as an image, exposing LSB steganography, and counts fully transparent pixels that still carry colour data
+- **JPEG structure**: reports the MCU block size, the true encoded canvas, and how many padding rows and columns the file carries beyond its displayed size, which is a hint that the image was cropped after encoding
 - **PDF**: Author/Producer/CreationDate and the rest of the document dictionary, page count, encryption state
 - **Office / OpenDocument**: `docProps`/`meta.xml` contents plus a full listing of every file inside the container
 - **Archives**: zip/jar/apk/tar content listing

@@ -15,10 +15,15 @@ if jsonMode, !fileArguments.isEmpty {
         for path in fileArguments {
             let url = URL(fileURLWithPath: path)
             let report = await MetadataService.buildReport(for: url)
-            let sections: [[String: Any]] = report.sections.map { section in
+            var sections: [[String: Any]] = report.sections.map { section in
                 var fields: [String: String] = [:]
                 for field in section.fields { fields[field.key] = field.value }
                 return ["title": section.title, "fields": fields]
+            }
+            for analysis in report.imageAnalyses {
+                var fields: [String: String] = [:]
+                for field in analysis.fields { fields[field.key] = field.value }
+                sections.append(["title": analysis.exportTitle, "fields": fields])
             }
             let dict: [String: Any] = ["file": report.url.path, "sections": sections]
             if let data = try? JSONSerialization.data(withJSONObject: dict, options: [.prettyPrinted, .sortedKeys]),

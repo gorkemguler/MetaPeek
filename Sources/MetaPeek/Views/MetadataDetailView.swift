@@ -131,9 +131,13 @@ struct MetadataDetailView: View {
     }
 
     private func copyAllToClipboard() {
-        let text = report.sections.map { section in
+        let sectionText = report.sections.map { section in
             "## \(section.title)\n" + section.fields.map { "\($0.key): \($0.value)" }.joined(separator: "\n")
-        }.joined(separator: "\n\n")
+        }
+        let analysisText = report.imageAnalyses.map { analysis in
+            "## \(analysis.title)\n" + analysis.fields.map { "\($0.key): \($0.value)" }.joined(separator: "\n")
+        }
+        let text = (sectionText + analysisText).joined(separator: "\n\n")
         let pasteboard = NSPasteboard.general
         pasteboard.clearContents()
         pasteboard.setString(text, forType: .string)

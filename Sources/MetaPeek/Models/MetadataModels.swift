@@ -20,6 +20,9 @@ struct MetadataSection: Identifiable, Hashable {
 struct ImageAnalysis: Identifiable {
     let id = UUID()
     let title: String
+    /// Stable English title for JSON export, so scripts don't have to cope
+    /// with the interface language changing the keys.
+    let exportTitle: String
     let icon: String
     let explanation: String
     /// CGImage, not NSImage: this is produced on a background task during app

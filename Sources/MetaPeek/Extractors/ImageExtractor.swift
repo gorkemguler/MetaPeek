@@ -32,6 +32,18 @@ struct ImageExtractor: MetadataExtractor {
             sections.append(MetadataSection(title: "Image", fields: topFields))
         }
 
+        if let padding = JPEGPadding.inspect(url: url) {
+            var fields = [
+                MetadataField(key: "MCU Block Size", value: "\(padding.mcuWidth)x\(padding.mcuHeight)"),
+                MetadataField(key: "Encoded Size", value: "\(padding.width + padding.paddingWidth)x\(padding.height + padding.paddingHeight)"),
+                MetadataField(key: "Hidden Padding", value: "\(padding.paddingWidth)x\(padding.paddingHeight)"),
+            ]
+            if padding.paddingWidth > 0 || padding.paddingHeight > 0 {
+                fields.append(MetadataField(key: "Note", value: L10n.jpegPaddingNote))
+            }
+            sections.append(MetadataSection(title: "JPEG Structure", fields: fields))
+        }
+
         addDictionarySection(&sections, title: "EXIF", dict: props[kCGImagePropertyExifDictionary] as? [CFString: Any])
         addDictionarySection(&sections, title: "EXIF Aux", dict: props[kCGImagePropertyExifAuxDictionary] as? [CFString: Any])
         addDictionarySection(&sections, title: "TIFF", dict: props[kCGImagePropertyTIFFDictionary] as? [CFString: Any])

@@ -69,6 +69,7 @@ enum ImageForensics {
         let mean = Double(differenceTotal) / Double(pixelCount)
         return ImageAnalysis(
             title: L10n.elaTitle,
+            exportTitle: "Error Level Analysis",
             icon: "square.3.layers.3d.down.right",
             explanation: L10n.elaExplanation,
             image: rendered,
@@ -136,6 +137,7 @@ enum ImageForensics {
 
         return ImageAnalysis(
             title: L10n.hiddenPixelsTitle,
+            exportTitle: "Hidden Pixels (LSB)",
             icon: "eye.trianglebadge.exclamationmark",
             explanation: L10n.hiddenPixelsExplanation,
             image: rendered,

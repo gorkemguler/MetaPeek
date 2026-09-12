@@ -37,6 +37,10 @@ enum L10n {
           "The least significant bit of each colour channel is rendered as an image. Random noise is normal; visible text, shapes or sharp blocks can indicate embedded data (steganography).")
     }
     static var hiddenDataSuspected: String { t("veri gizlenmiş olabilir", "data may be hidden here") }
+    static var jpegPaddingNote: String {
+        t("Bu pikseller dosyada kodlu ama görüntülenirken kırpılıyor; kırpma öncesi içerik taşıyabilir.",
+          "These pixels are encoded in the file but cropped away when displayed, and can still hold pre-crop content.")
+    }
 
     static func sections(_ count: Int) -> String {
         t("\(count) bölüm", count == 1 ? "1 section" : "\(count) sections")

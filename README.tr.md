@@ -39,6 +39,7 @@ Mevcut metadata araçları ya bayraklarını ezberlemeniz gereken birer CLI (`ex
 - **Görseller**: EXIF, GPS, TIFF, IPTC, PNG/JFIF chunk'ları (Apple ImageIO ile) ve GPS varsa satır içi harita önizlemesi
 - **Hata Seviyesi Analizi (ELA)**: görsel yeniden sıkıştırılıp fark yükseltilir; sonradan düzenlenen veya yapıştırılan bölgeler karenin geri kalanından ayrışır
 - **Gizli Pikseller (LSB)**: her renk kanalının en düşük anlamlı biti görüntüye çevrilir, böylece LSB steganografisi ortaya çıkar; ayrıca renk verisi taşıyan tamamen şeffaf pikseller sayılır
+- **JPEG yapısı**: MCU blok boyutunu, dosyanın gerçek kodlanmış tuvalini ve görüntülenen boyutun ötesinde taşıdığı dolgu satır/sütun sayısını raporlar; bu, görselin kodlandıktan sonra kırpıldığına işaret edebilir
 - **PDF**: Author/Producer/CreationDate ve doküman sözlüğünün geri kalanı, sayfa sayısı, şifreleme durumu
 - **Office / OpenDocument**: `docProps`/`meta.xml` içeriği ve konteyner içindeki tüm dosyaların listesi
 - **Arşivler**: zip/jar/apk/tar içerik listesi

@@ -33,6 +33,7 @@ enum Theme {
             ("file(1) Classification", "terminal"),
             ("GPS", "location"),
             ("Image", "photo"),
+            ("JPEG Structure", "square.grid.3x3"),
             ("EXIF", "camera"),
             ("TIFF", "camera"),
             ("IPTC", "camera"),
