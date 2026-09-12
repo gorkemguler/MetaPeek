@@ -16,7 +16,7 @@ let ctx = gctx.cgContext
 let w = CGFloat(width)
 let h = CGFloat(height)
 
-// Background — same slate-navy as the app icon.
+// Background: same slate-navy as the app icon.
 let bgColors = [
     NSColor(calibratedRed: 0.11, green: 0.14, blue: 0.21, alpha: 1).cgColor,
     NSColor(calibratedRed: 0.07, green: 0.09, blue: 0.13, alpha: 1).cgColor,
@@ -69,7 +69,7 @@ let wordmark = NSAttributedString(string: "MetaPeek", attributes: [
     .font: NSFont.systemFont(ofSize: 116, weight: .bold),
     .foregroundColor: NSColor(calibratedRed: 0.96, green: 0.97, blue: 0.98, alpha: 1),
 ])
-let tagline = NSAttributedString(string: "Metadata inspection for any file — built for CTF & OSINT", attributes: [
+let tagline = NSAttributedString(string: "Metadata inspection for any file, built for CTF & OSINT", attributes: [
     .font: NSFont.systemFont(ofSize: 40, weight: .regular),
     .foregroundColor: NSColor(calibratedRed: 0.60, green: 0.64, blue: 0.72, alpha: 1),
 ])

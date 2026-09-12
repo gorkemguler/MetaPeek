@@ -28,7 +28,7 @@ struct GeneralInfoExtractor: MetadataExtractor {
 
         if let sample = try? readPrefix(url: url, maxBytes: 8 * 1024 * 1024), !sample.isEmpty {
             let entropy = Entropy.shannon(of: sample)
-            let note = entropy > 7.5 ? " — high, possibly compressed/encrypted/packed" : ""
+            let note = entropy > 7.5 ? " (high, possibly compressed/encrypted/packed)" : ""
             sections.append(MetadataSection(title: "Entropy", fields: [
                 MetadataField(key: "Shannon Entropy (0-8, sampled)", value: String(format: "%.3f%@", entropy, note)),
             ]))

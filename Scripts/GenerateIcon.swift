@@ -13,7 +13,7 @@ NSGraphicsContext.current = gctx
 let ctx = gctx.cgContext
 let s = CGFloat(size)
 
-// Background — flat, professional slate-navy gradient.
+// Background: flat, professional slate-navy gradient.
 let bgColors = [
     NSColor(calibratedRed: 0.11, green: 0.14, blue: 0.21, alpha: 1).cgColor,
     NSColor(calibratedRed: 0.07, green: 0.09, blue: 0.13, alpha: 1).cgColor,
@@ -26,11 +26,11 @@ let accentColor = NSColor(calibratedRed: 0.38, green: 0.55, blue: 0.92, alpha: 1
 let lensCenter = CGPoint(x: s * 0.46, y: s * 0.56)
 let lensRadius: CGFloat = 200
 
-// Lens interior — subtly lighter than the background, flat fill.
+// Lens interior: subtly lighter than the background, flat fill.
 ctx.setFillColor(NSColor(calibratedRed: 0.15, green: 0.18, blue: 0.26, alpha: 1).cgColor)
 ctx.fillEllipse(in: CGRect(x: lensCenter.x - lensRadius, y: lensCenter.y - lensRadius, width: lensRadius * 2, height: lensRadius * 2))
 
-// Minimal "text lines" glyph inside the lens — reads as document/metadata, not binary.
+// Minimal "text lines" glyph inside the lens, reads as document/metadata, not binary.
 ctx.saveGState()
 let lensPath = CGPath(ellipseIn: CGRect(x: lensCenter.x - lensRadius, y: lensCenter.y - lensRadius, width: lensRadius * 2, height: lensRadius * 2), transform: nil)
 ctx.addPath(lensPath)
@@ -51,7 +51,7 @@ for (index, width) in lineWidths.enumerated() {
 }
 ctx.restoreGState()
 
-// Lens ring — clean, flat, no glow.
+// Lens ring: clean, flat, no glow.
 ctx.setStrokeColor(ringColor.cgColor)
 ctx.setLineWidth(42)
 ctx.setLineCap(.round)

@@ -10,7 +10,7 @@
 
 <p align="center"><sub><a href="README.md">🇬🇧 English</a> · 🇹🇷 Türkçe</sub></p>
 
-**Uzantısı ne olursa olsun** herhangi bir dosyanın içinde saklı metadata'yı gösteren native bir macOS uygulaması. CTF ve OSINT çalışmaları için tasarlandı — bu işlerde dosyanın metadata'sı çoğu zaman içeriğinden daha değerlidir.
+**Uzantısı ne olursa olsun** herhangi bir dosyanın içinde saklı metadata'yı gösteren native bir macOS uygulaması. CTF ve OSINT çalışmaları için tasarlandı; bu işlerde dosyanın metadata'sı çoğu zaman içeriğinden daha değerlidir.
 
 Bir fotoğrafı sürükleyip bırakın, nerede çekildiğini görün. Bir PDF, Office dokümanı, arşiv ya da kaynağı bilinmeyen bir Mach-O binary'si atın; taşıdığı bütün yazar adlarını, zaman damgalarını, GPS koordinatlarını, hash'leri, gömülü string'leri ve bağlı kütüphaneleri alın. FOCA veya ExifTool'un yaptığı sızıntı avcılığının aynısı, ama bir düzine terminal komutu yerine tek bir native uygulamada.
 
@@ -18,29 +18,34 @@ Bir fotoğrafı sürükleyip bırakın, nerede çekildiğini görün. Bir PDF, O
   <img src="screenshots/screenshot-image-gps.png" width="90%" alt="MetaPeek bir fotoğrafın EXIF/GPS metadata'sını ve konumunu harita üzerinde gösteriyor">
 </p>
 <p align="center">
+  <img src="screenshots/screenshot-ela-hidden-pixels.png" width="90%" alt="MetaPeek bir JPEG üzerinde ELA çalıştırıyor, sonradan yapıştırılan bölge belirgin şekilde ayrışıyor">
+</p>
+<p align="center">
   <img src="screenshots/screenshot-pdf-entropy.png" width="90%" alt="MetaPeek bir PDF'in metadata'sını, hash'lerini ve Shannon entropi göstergesini gösteriyor">
 </p>
 
-*(Ekran görüntülerinde tamamen sahte örnek dosyalar kullanıldı — gerçek kişisel veri yok.)*
+*(Ekran görüntülerinde tamamen sahte örnek dosyalar kullanıldı. Gerçek kişisel veri yok.)*
 
 ## Neden?
 
-Mevcut metadata araçları ya bayraklarını ezberlemeniz gereken birer CLI (`exiftool`, `pdfinfo`, `otool`), ya da dosyanın içinde ne olduğunu zaten bildiğinizi varsayan toplu temizleme araçları. MetaPeek aradaki boşluğu dolduruyor: tek dosyayı sürükleyin, neyi sızdırdığını görün — hem de çıktıyı ekrana dökmek yerine gerçekten okunmak üzere tasarlanmış bir arayüzde.
+Mevcut metadata araçları ya bayraklarını ezberlemeniz gereken birer CLI (`exiftool`, `pdfinfo`, `otool`), ya da dosyanın içinde ne olduğunu zaten bildiğinizi varsayan toplu temizleme araçları. MetaPeek aradaki boşluğu dolduruyor: tek dosyayı sürükleyin, neyi sızdırdığını görün; hem de çıktıyı ekrana dökmek yerine gerçekten okunmak üzere tasarlanmış bir arayüzde.
 
 ## Özellikler
 
-- **Genel bilgi** — boyut, tarihler, POSIX izinleri, sahip, UTI, magic-byte imza tespiti
-- **Hash'ler** — MD5 / SHA1 / SHA256, akış halinde hesaplanır; büyük dosyalar belleği şişirmez
-- **Shannon entropisi** — görsel gösterge, sıkıştırılmış/şifrelenmiş/paketlenmiş içerik ihtimalini işaret eder
-- **Yazdırılabilir string'ler** — ilk 200 string; adli analizde `strings(1)` ile atılan ilk adımın aynısı
-- **Görseller** — EXIF, GPS, TIFF, IPTC, PNG/JFIF chunk'ları (Apple ImageIO ile) ve GPS varsa satır içi harita önizlemesi
-- **PDF** — Author/Producer/CreationDate ve doküman sözlüğünün geri kalanı, sayfa sayısı, şifreleme durumu
-- **Office / OpenDocument** — `docProps`/`meta.xml` içeriği ve konteyner içindeki tüm dosyaların listesi
-- **Arşivler** — zip/jar/apk/tar içerik listesi
-- **Ses/video** — süre, track bilgisi, gömülü ID3/iTunes/QuickTime metadata'sı
-- **Mach-O / ELF / PE binary'ler** — mimari (`lipo`), bağlı kütüphaneler (`otool -L`), kod imzası ve entitlement'lar (`codesign`) — indirilmiş, kaynağı belirsiz bir binary'yi incelerken işe yarar
-- **ExifTool zenginleştirmesi** — sistemde `exiftool` kuruluysa (`brew install exiftool`), native çıkarıcıların yakalayamadığı alanlar otomatik olarak eklenir
-- **Dışa aktarma** — dosya başına JSON export ya da her şeyi metin olarak panoya kopyalama
+- **Genel bilgi**: boyut, tarihler, POSIX izinleri, sahip, UTI, magic-byte imza tespiti
+- **Hash'ler**: MD5 / SHA1 / SHA256, akış halinde hesaplanır; büyük dosyalar belleği şişirmez
+- **Shannon entropisi**: görsel gösterge, sıkıştırılmış, şifrelenmiş veya paketlenmiş içerik ihtimalini işaret eder
+- **Yazdırılabilir string'ler**: ilk 200 string; adli analizde `strings(1)` ile atılan ilk adımın aynısı
+- **Görseller**: EXIF, GPS, TIFF, IPTC, PNG/JFIF chunk'ları (Apple ImageIO ile) ve GPS varsa satır içi harita önizlemesi
+- **Hata Seviyesi Analizi (ELA)**: görsel yeniden sıkıştırılıp fark yükseltilir; sonradan düzenlenen veya yapıştırılan bölgeler karenin geri kalanından ayrışır
+- **Gizli Pikseller (LSB)**: her renk kanalının en düşük anlamlı biti görüntüye çevrilir, böylece LSB steganografisi ortaya çıkar; ayrıca renk verisi taşıyan tamamen şeffaf pikseller sayılır
+- **PDF**: Author/Producer/CreationDate ve doküman sözlüğünün geri kalanı, sayfa sayısı, şifreleme durumu
+- **Office / OpenDocument**: `docProps`/`meta.xml` içeriği ve konteyner içindeki tüm dosyaların listesi
+- **Arşivler**: zip/jar/apk/tar içerik listesi
+- **Ses/video**: süre, track bilgisi, gömülü ID3/iTunes/QuickTime metadata'sı
+- **Mach-O / ELF / PE binary'ler**: mimari (`lipo`), bağlı kütüphaneler (`otool -L`), kod imzası ve entitlement'lar (`codesign`); indirilmiş, kaynağı belirsiz bir binary'yi incelerken işe yarar
+- **ExifTool zenginleştirmesi**: sistemde `exiftool` kuruluysa (`brew install exiftool`), native çıkarıcıların yakalayamadığı alanlar otomatik olarak eklenir
+- **Dışa aktarma**: dosya başına JSON export ya da her şeyi metin olarak panoya kopyalama
 - Arayüz **sistemin açık/koyu temasını** takip eder ve sistem diline göre otomatik olarak **Türkçe veya İngilizce** açılır
 
 ## İndirme
@@ -58,7 +63,7 @@ cd MetaPeek
 open dist/MetaPeek.app
 ```
 
-`build_app.sh` release binary'sini derler, düzgün bir `.app` paketi (ikon, Info.plist) oluşturur ve ad-hoc imzalar — kendi makinenizde çalıştırmak için bu yeterli. Başka makinelere dağıtmak için Developer ID imzası ve notarization gerekir.
+`build_app.sh` release binary'sini derler, düzgün bir `.app` paketi (ikon, Info.plist) oluşturur ve ad-hoc imzalar; kendi makinenizde çalıştırmak için bu yeterli. Başka makinelere dağıtmak için Developer ID imzası ve notarization gerekir.
 
 Geliştirme sırasında hızlı denemeler için:
 
@@ -68,7 +73,7 @@ swift run
 
 ## Komut satırı kullanımı
 
-Dosya yolu verdiğinizde MetaPeek arayüzü o dosyalar yüklü olarak açılır — dosyaya çift tıklamak ya da Dock ikonuna sürüklemekle aynı davranış:
+Dosya yolu verdiğinizde MetaPeek arayüzü o dosyalar yüklü olarak açılır; dosyaya çift tıklamak ya da Dock ikonuna sürüklemekle aynı davranış:
 
 ```bash
 open -a MetaPeek supheli.pdf foto.jpg
@@ -82,13 +87,16 @@ MetaPeek.app/Contents/MacOS/MetaPeek --json supheli.pdf | jq .
 
 ## Mimari
 
-Metadata çıkarımı `Sources/MetaPeek/Extractors/` altında bağımsız `MetadataExtractor` implementasyonlarına bölünmüştür (Image, PDF, Office, Archive, AudioVideo, MachO, ExifTool). Her dosya, kendisini işleyebileceğini bildiren tüm çıkarıcılardan geçer ve üretilen bölümler birleştirilir — yeni bir format eklemek, `MetadataService.extractors` listesine bir çıkarıcı daha eklemekten ibarettir.
+Metadata çıkarımı `Sources/MetaPeek/Extractors/` altında bağımsız `MetadataExtractor` implementasyonlarına bölünmüştür (Image, PDF, Office, Archive, AudioVideo, MachO, ExifTool). Her dosya, kendisini işleyebileceğini bildiren tüm çıkarıcılardan geçer ve üretilen bölümler birleştirilir; yeni bir format eklemek, `MetadataService.extractors` listesine bir çıkarıcı daha eklemekten ibarettir.
+
+Görsel forensics (ELA, LSB) anahtar/değer yerine görüntü ürettiği için bu hattın dışında, `ImageForensics` içinde durur. Analiz, görselin küçültülmüş bir kopyası üzerinde çalışır ve tamamen CoreGraphics kullanır; böylece arka plan görevinden AppKit'e hiç dokunmaz.
 
 ## Bilinen sınırlamalar
 
 - Video dosyalarındaki GPS konumu (ISO 6709) ham metin olarak gösteriliyor, henüz haritaya işlenmiyor
 - PDF içine gömülü JavaScript ve ek dosyalar henüz listelenmiyor
+- ELA en anlamlı sonucu JPEG dosyalarda verir; kayıpsız formatlarda çoğunlukla düz bölgeleri işaretler
 
 ## Lisans
 
-MIT — [LICENSE](LICENSE) dosyasına bakın.
+MIT, [LICENSE](LICENSE) dosyasına bakın.

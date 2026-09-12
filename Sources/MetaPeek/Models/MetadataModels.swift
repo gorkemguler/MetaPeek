@@ -14,10 +14,25 @@ struct MetadataSection: Identifiable, Hashable {
     var fields: [MetadataField]
 }
 
+/// A rendered forensic view of an image (ELA, LSB planes) plus the numbers
+/// behind it. Kept separate from MetadataSection because the picture, not the
+/// key/value pairs, is the actual result.
+struct ImageAnalysis: Identifiable {
+    let id = UUID()
+    let title: String
+    let icon: String
+    let explanation: String
+    /// CGImage, not NSImage: this is produced on a background task during app
+    /// launch, and touching AppKit there races AppKit's own initialization.
+    let image: CGImage
+    var fields: [MetadataField] = []
+}
+
 struct FileReport: Identifiable {
     let id = UUID()
     let url: URL
     var sections: [MetadataSection] = []
     var thumbnail: NSImage?
     var gpsCoordinate: CLLocationCoordinate2D?
+    var imageAnalyses: [ImageAnalysis] = []
 }

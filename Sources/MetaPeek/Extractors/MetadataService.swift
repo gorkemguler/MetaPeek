@@ -25,6 +25,9 @@ enum MetadataService {
         }
 
         report.gpsCoordinate = extractGPSCoordinate(from: report.sections)
+        if uti?.conforms(to: .image) == true {
+            report.imageAnalyses = ImageForensics.analyses(for: url)
+        }
         report.thumbnail = await generateThumbnail(url: url)
         return report
     }

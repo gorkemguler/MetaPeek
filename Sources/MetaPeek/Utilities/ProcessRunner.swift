@@ -13,7 +13,7 @@ enum ProcessRunner {
         return candidates.first { FileManager.default.isExecutableFile(atPath: $0) }
     }
 
-    /// Reads stdout to EOF before reading stderr — safe here because every caller
+    /// Reads stdout to EOF before reading stderr. Safe here because every caller
     /// invokes short-lived inspection tools (file, otool, codesign, tar -t, exiftool)
     /// whose stderr stays well under the pipe buffer size.
     static func run(_ executable: String, _ args: [String]) -> (stdout: String, stderr: String)? {

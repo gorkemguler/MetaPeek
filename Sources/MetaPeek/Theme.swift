@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum Theme {
-    /// Single, deliberate brand color — used sparingly for the odd highlight
+    /// Single, deliberate brand color, used sparingly for the odd highlight
     /// (selection, links, primary buttons), not as decoration.
     static let accent = Color(red: 0.28, green: 0.45, blue: 0.82)
 
@@ -13,7 +13,7 @@ enum Theme {
     static let panel = Color(nsColor: .controlBackgroundColor)
     static let stroke = Color(nsColor: .separatorColor)
 
-    /// Sidebar and main content deliberately share one flat surface family —
+    /// Sidebar and main content deliberately share one flat surface family:
     /// underPageBackground/windowBackground are Apple's own paired tokens for
     /// exactly this split, so the two panes read as one window, not two.
     static let sidebarSurface = Color(nsColor: .underPageBackgroundColor)

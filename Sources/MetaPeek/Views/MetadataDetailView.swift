@@ -35,6 +35,11 @@ struct MetadataDetailView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                         .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).strokeBorder(Theme.stroke))
                 }
+                if searchText.isEmpty {
+                    ForEach(report.imageAnalyses) { analysis in
+                        ImageAnalysisView(analysis: analysis)
+                    }
+                }
                 ForEach(filteredSections) { section in
                     MetadataSectionView(section: section)
                 }

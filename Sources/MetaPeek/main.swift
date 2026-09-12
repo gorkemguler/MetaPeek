@@ -3,7 +3,7 @@ import SwiftUI
 
 /// `--json` with one or more file paths: dump metadata as JSON to stdout and
 /// exit, skipping the GUI (for Terminal / CTF-OSINT scripting).
-/// Plain file paths with no flag: standard macOS "open with" convention —
+/// Plain file paths with no flag: standard macOS "open with" convention:
 /// launch the GUI with those files already loaded, matching double-click /
 /// drag-onto-Dock-icon behavior.
 let jsonMode = CommandLine.arguments.contains("--json")
